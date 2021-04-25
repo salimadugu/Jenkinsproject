@@ -1,39 +1,46 @@
-node {
-  def remote = [:]
-  remote.name = 'Ansible'
-  remote.host = '172.31.4.250'
-  remote.user = 'root'
-  remote.password = 'phani@123'
-  remote.allowAnyHosts = true
-    stage('Compile'){
-        sh 'mvn compile'
-    }
-    stage('test'){
-        sh 'mvn test'
-    }
-    stage('package'){
-        sh 'mvn package'
-    }
+pipeline {
+    agent any
+
+    stages {
+        stage('Validate') {
+            steps {
+                echo 'Validate Code'
+                sh 'mvn compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+                sh 'mvn test'
+            }
+        }
+        stage('Package') {
+            steps {
+                echo 'Packaging....'
+                sh 'mvn package'
+            }
+        }
+          
     
     stage('send dockerfile'){
-        sshPut remote: remote, from: '/var/lib/jenkins/workspace/Project/Dockerfile' , into: '/opt'
-        sshPut remote: remote, from: '/var/lib/jenkins/workspace/Project/target/WebAppCal*.war' , into: '/opt'
-
+        steps{
+        sh 'sudo cp /var/lib/jenkins/workspace/project/Dockerfile /home/centos/'
+        }
       
     }
-  stage('Remote SSH') {
-      sshCommand remote: remote, command: "docker image build -t $JOB_NAME:v1.$BUILD_ID /opt/."
-      sshCommand remote: remote, command: "docker image tag $JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:v1.$BUILD_ID"
-      sshCommand remote: remote, command: "docker image tag $JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:latest"
-      sshCommand remote: remote, command: "docker image push phani09/$JOB_NAME:v1.$BUILD_ID"
-      sshCommand remote: remote, command: "docker image push phani09/$JOB_NAME:latest"
-      sshCommand remote: remote, command: "docker image rmi $JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:latest"
+  stage('Build and push Docker images..') {
+      steps{
+       sh "sudo docker image build -t $JOB_NAME:v1.$BUILD_ID ."
+       sh "sudo docker image tag $JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:v1.$BUILD_ID"
+       sh "sudo docker image tag $JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:latest"
+       sh "sudo docker image push phani09/$JOB_NAME:v1.$BUILD_ID"
+       sh "sudo docker image push phani09/$JOB_NAME:latest"
+       sh "sudo docker image rmi $JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:v1.$BUILD_ID phani09/$JOB_NAME:latest"
+      }
   
   }
-  
-   
-   
+        
+    }
 }
-
 
 
