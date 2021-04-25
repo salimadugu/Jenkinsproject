@@ -42,6 +42,12 @@ pipeline {
   
   }
         
+        stage('Run ansible'){
+            steps{
+                sh 'ansible-playbook depl.yml'
+            }
+        }
+        
     }
 }
 
