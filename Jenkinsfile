@@ -23,7 +23,7 @@ pipeline {
         stage('Copy war') {
             steps {
                 echo 'copying ...'
-                sh 'sudo cp /var/lib/jenkins/project/target/*.war /home/centos/'
+                sh 'sudo cp /var/lib/jenkins/workspace/project/target/*.war /home/centos/'
             }
         }
         
