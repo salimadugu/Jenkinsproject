@@ -20,6 +20,13 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage('Copy war') {
+            steps {
+                echo 'copying ...'
+                sh 'sudo cp /var/lib/jenkins/project/target/*.war /home/centos/'
+            }
+        }
+        
           
     
     
