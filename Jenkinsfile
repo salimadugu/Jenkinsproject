@@ -26,8 +26,8 @@ pipeline {
                 sh 'sudo cp /var/lib/jenkins/workspace/project/target/*.war /home/centos/'
                 echo 'copied'
             }
-*/        }
-    
+       }
+*/
           
     
     
