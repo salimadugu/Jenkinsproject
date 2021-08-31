@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-/*        stage('Validate') {
+       stage('Validate') {
             steps {
                 echo 'Validate Code'
                 sh 'mvn compile'
@@ -27,7 +27,7 @@ pipeline {
                 echo 'copied'
             }
        }
-*/
+
           
     
     
