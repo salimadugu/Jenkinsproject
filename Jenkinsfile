@@ -20,6 +20,8 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        
+  /*
         stage('Copy war') {
             steps {
                 echo 'copying ...'
@@ -29,7 +31,7 @@ pipeline {
        }
 
     }  
-  /*  
+    
     
      stage('Build and push Docker images..') {
       steps{
