@@ -20,7 +20,7 @@ pipeline {
                 sh 'mvn package'
             }
         }
-/*        stage('Copy war') {
+        stage('Copy war') {
             steps {
                 echo 'copying ...'
                 sh 'sudo cp /var/lib/jenkins/workspace/project/target/*.war /home/centos/'
@@ -28,8 +28,8 @@ pipeline {
             }
        }
 
-*/          
-    
+          
+  /*  
     
      stage('Build and push Docker images..') {
       steps{
@@ -51,5 +51,5 @@ pipeline {
         
     }
 }
-
+*/
 
