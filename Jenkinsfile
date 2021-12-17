@@ -21,6 +21,8 @@ pipeline {
                 echo '6 build'
             }
         }
+    }
+}
         
   /*
         stage('Copy war') {
@@ -55,4 +57,4 @@ pipeline {
     }
 }
 */
-}
+
