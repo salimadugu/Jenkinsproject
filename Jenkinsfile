@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Packaging....'
                 sh 'mvn package'
-                echo '3nd build'
+                echo '4nd build'
             }
         }
     
