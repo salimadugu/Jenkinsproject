@@ -40,11 +40,11 @@ pipeline {
      stage('Build and push Docker images..') {
       steps{
        sh "sudo docker image build -t $JOB_NAME:v1.$BUILD_ID /var/lib/jenkins/workspace/project/."
-       sh "sudo docker image tag $JOB_NAME:v1.$BUILD_ID salimadugu/$JOB_NAME:v1.$BUILD_ID"
-       sh "sudo docker image tag $JOB_NAME:v1.$BUILD_ID salimadugu/$JOB_NAME:latest"
-       sh "sudo docker image push salimadugu/$JOB_NAME:v1.$BUILD_ID"
-       sh "sudo docker image push salimadugu/$JOB_NAME:latest"
-       sh "sudo docker image rmi $JOB_NAME:v1.$BUILD_ID salimadugu/$JOB_NAME:v1.$BUILD_ID salimadugu/$JOB_NAME:latest"
+       sh "sudo docker image tag $JOB_NAME:v1.$BUILD_ID salimadugu5/$JOB_NAME:v1.$BUILD_ID"
+       sh "sudo docker image tag $JOB_NAME:v1.$BUILD_ID salimadugu5/$JOB_NAME:latest"
+       sh "sudo docker image push salimadugu5/$JOB_NAME:v1.$BUILD_ID"
+       sh "sudo docker image push salimadugu5/$JOB_NAME:latest"
+       sh "sudo docker image rmi $JOB_NAME:v1.$BUILD_ID salimadugu5/$JOB_NAME:v1.$BUILD_ID salimadugu5/$JOB_NAME:latest"
       }
   
   }
